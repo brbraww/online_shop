@@ -2,36 +2,53 @@
 {% load static %}
 
 {% block title %}
-    {% if category %}
-        {{ category.name }}
-    {% else %}Products{% endif %}
+{% if category %}
+{{ category.name }}
+{% else %}Products{% endif %}
 {% endblock %}
 
 {% block content %}
-<div id="sidebar">
-    <h3>Categories</h3>
-    <ul>
+<div id="categories">
+    <h3>Категории:</h3>
+    <ul class="hr">
         <li {% if not category %}class="selected"{% endif %}>
-            <a href="{% url 'shop:product_list' %}">All</a>
+            <a href="{% url 'shop:product_list' %}">Все товары</a>
         </li>
         {% for c in categories %}
         <li {% if category.slug == c.slug %}class="selected" {% endif %}>
-            <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+            | <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
         </li>
         {% endfor %}
     </ul>
 </div>
+
 <div id="main" class="product-list">
-    <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
-    {% for product in products %}
-    <div class="item">
-        <a href="{{ product.get_absolute_url }}">
-            <img src="{% if product.image %}{{ product.image.url }}{%else %}{% static 'img/no_image.png' %}{% endif %}" alt="no image available">
-        </a>
-        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-        <br>
-        ${{ product.price }}
+    <h1>{% if category %}{{ category.name }}{% else %}Все товары{% endif %}</h1>
+    <div class="card-columns">
+        {% for product in products %}
+        <div class="card m-1">
+            <a href="{{ product.get_absolute_url }}">
+                <img class="card-img-top" src="{% if product.image %}{{ product.image.url }}{%else %}{% static 'img/no_image.png' %}{% endif %}" alt="no image available">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">Цена: ${{ product.price }}</p>
+                <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Далее</a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}
+
+<div class="card" style="width: 18rem;">
+    <a href="{{ product.get_absolute_url }}">
+        <img src="{% if product.image %}{{ product.image.url }}{%else %}{% static 'img/no_image.png' %}{% endif %}" alt="no image available">
+    </a>
+    <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">Цена: ${{ product.price }}</p>
+        <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Далее</a>
+    </div>
+</div>
+
