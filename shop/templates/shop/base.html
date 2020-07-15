@@ -30,7 +30,18 @@
                 </div>
             </li>
         </ul>
-        <p class="my-2 my-lg-0"><a href="{% url 'cart:cart_detail' %}" class="btn btn-primary">Корзина</a></p>
+        <p class="my-2 my-lg-0">
+        {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+                Ваша корзина:
+                <a class="btn btn-primary" href="{% url 'cart:cart_detail' %}">
+                    ${{ cart.get_total_price }}
+                </a>
+            {% else %}
+                Ваша корзина пуста.
+            {% endif %}
+        {% endwith %}
+        </p>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
