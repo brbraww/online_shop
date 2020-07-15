@@ -50,7 +50,7 @@
 <p class="text-right">
     <a href="{% url 'shop:product_list' %}" class="btn btn-primary">Продолжить покупки</a>
     {% if cart.product_list %}
-        <a href="#" class="btn btn-primary">Купить</a>
+        <a href="{% url 'orders:order_create' %}" class="btn btn-primary">Оформить заказ</a>
     {% endif %}
 </p>
 {% endblock %}
