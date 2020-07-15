@@ -20,7 +20,7 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Menu
+                    Меню
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">Вход</a>
@@ -30,7 +30,7 @@
                 </div>
             </li>
         </ul>
-        <p class="my-2 my-lg-0">Ваша корзина пуста.</p>
+        <p class="my-2 my-lg-0"><a href="{% url 'cart:cart_detail' %}" class="btn btn-primary">Корзина</a></p>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
